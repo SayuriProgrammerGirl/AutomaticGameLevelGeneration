@@ -31,6 +31,64 @@ namespace AutomaticGameLevelGeneration
 
     public class FitnessFunction
     {
+        public double EvaluateIndividual()
+        {
+            return 0;
+        }
+
+        public double EvaluateGroundLevels(int[] groundLevels)
+        {
+            int levelLength = groundLevels.Length;
+            int maxHeightLevel = 15;
+            
+            int[] counts = GetHeightCounts(groundLevels, maxHeightLevel);
+
+            var probabilities = GetProbabilities(groundLevels, counts);
+
+            float entropy = 0;
+            float sum = 0;
+            for (int i = 0; i < probabilities.Length; i++)
+            {
+                var groundLevelProbability = probabilities[i];
+                var log = Math.Log(groundLevelProbability, 2);
+                sum += groundLevelProbability * (float)log;
+            }
+
+            entropy = -1 * sum;
+
+            double fitness = 0;
+            return fitness;
+        }
+
+        private static float[] GetProbabilities(int[] groundLevels, int[] counts)
+        {
+            float[] groundLevelProbabilities = new float[15];
+            for (int i = 0; i < groundLevelProbabilities.Length; i++)
+            {
+                float probability = (float) counts[i]/groundLevels.Length;
+                groundLevelProbabilities[i] = probability;
+            }
+            return groundLevelProbabilities;
+        }
+
+        private static int[] GetHeightCounts(int[] groundLevels, int maxHeightLevel)
+        {
+            int[] count = new int[maxHeightLevel + 1];
+
+            for (int i = 0; i < count.Length; i++)
+            {
+                count[i] = 0;
+            }
+
+            for (int i = 0; i < groundLevels.Length; i++)
+            {
+                int height = groundLevels[i];
+                count[height]++;
+            }
+
+            return count;
+        }
+        
         public static float GetGroundFitness(Individ x)
         {
             int[] groundLevelCount = new int[15];
