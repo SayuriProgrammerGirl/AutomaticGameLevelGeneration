@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="EntropyFormulaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SparsenessFormulaTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutomaticGameLevelGeneration\AutomaticGameLevelGeneration.csproj">
