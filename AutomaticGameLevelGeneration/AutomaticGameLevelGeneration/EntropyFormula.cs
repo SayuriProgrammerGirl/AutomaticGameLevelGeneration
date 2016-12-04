@@ -16,9 +16,9 @@
 
         public double Compute(int[] values)
         {
-            int[] valueCounts = GetValueCounts(values);
-            double[] valueProbabilities = GetProbabilities(valueCounts);
-            double entropy = ComputeValueEntropy(valueProbabilities);
+            int[] valueCounts = this.GetValueCounts(values);
+            double[] valueProbabilities = this.GetProbabilities(valueCounts);
+            double entropy = this.ComputeValueEntropy(valueProbabilities);
             return entropy;
         }
 
@@ -32,8 +32,7 @@
             return entropy;
         }
 
-
-        //TODO - extract method in another class (Value Counter... something type)
+        //TODO - extract to another class
         internal int[] GetValueCounts(int[] values)
         {
             int[] counts = new int[maxValue + 1];
@@ -51,7 +50,7 @@
             return counts;
         }
 
-        //TODO - extract method in another class (Value Counter... something type)
+        //TODO - extract to another class
         internal double[] GetProbabilities(int[] valueCounts)
         {
             double[] valueProbability = new double[maxValue+1];
