@@ -34,7 +34,7 @@ namespace AutomaticGameLevelGeneration
                 for (int i = 0; i < 50; i++)
                 {
                     var individ = individs[Singletons.RandomInstance.Next(100)];
-                    mutated.Add(individ.Mutate(Singletons.RandomInstance));
+                    mutated.Add(individ.Mutate());
                 }
 
                 //fitness eval

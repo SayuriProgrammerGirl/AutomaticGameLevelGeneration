@@ -2,7 +2,7 @@ using System;
 
 namespace AutomaticGameLevelGeneration
 {
-    public class Individ
+    public class Individ : ICloneable
     {
         public int[] groundLevel;
 
@@ -38,7 +38,7 @@ namespace AutomaticGameLevelGeneration
         private int[] GenerateRandomArray(int length, int maxValue)
         {
             var array = new int[length];
-            
+
             for (int i = 0; i < length; i++)
             {
                 array[i] = Singletons.RandomInstance.Next(maxValue + 1);
@@ -57,82 +57,93 @@ namespace AutomaticGameLevelGeneration
         public Individ Crossover(Individ other, int crossoverPoint)
         {
             var child = new Individ();
-            child.groundLevel = new int[this.groundLevel.Length];
-            child.blockHeight = new int[this.blockHeight.Length];
-            child.blockType = new int[this.blockType.Length];
-            child.coinHeight = new int[this.coinHeight.Length];
-            child.enemyType = new int[this.enemyType.Length];
+            child.groundLevel = new int[Singletons.Configuration.LevelWidth];
+            child.blockHeight = new int[Singletons.Configuration.LevelWidth];
+            child.blockType = new int[Singletons.Configuration.LevelWidth];
+            child.coinHeight = new int[Singletons.Configuration.LevelWidth];
+            child.enemyType = new int[Singletons.Configuration.LevelWidth];
 
-            for (int i = 0; i < this.groundLevel.Length; i++)
-            {
-                if (i < crossoverPoint)
-                {
-                    child.groundLevel[i] = this.groundLevel[i];
-                    child.blockHeight[i] = this.groundLevel[i];
-                    child.blockType[i] = this.blockType[i];
-                    child.coinHeight[i] = this.coinHeight[i];
-                    child.enemyType[i] = this.enemyType[i];
-                }
-                else
-                {
-                    child.groundLevel[i] = other.groundLevel[i];
-                    child.blockHeight[i] = other.groundLevel[i];
-                    child.blockType[i] = other.blockType[i];
-                    child.coinHeight[i] = other.coinHeight[i];
-                    child.enemyType[i] = other.enemyType[i];
-                }
-            }
+            this.CopyRange(this.groundLevel, child.groundLevel, 0, crossoverPoint - 1);
+            this.CopyRange(this.blockHeight, child.blockHeight, 0, crossoverPoint - 1);
+            this.CopyRange(this.blockType, child.blockType, 0, crossoverPoint - 1);
+            this.CopyRange(this.coinHeight, child.coinHeight, 0, crossoverPoint - 1);
+            this.CopyRange(this.enemyType, child.enemyType, 0, crossoverPoint - 1);
 
+            this.CopyRange(this.groundLevel, child.groundLevel, crossoverPoint, Singletons.Configuration.LevelWidth-1);
+            this.CopyRange(this.blockHeight, child.blockHeight, crossoverPoint, Singletons.Configuration.LevelWidth - 1);
+            this.CopyRange(this.blockType, child.blockType, crossoverPoint, Singletons.Configuration.LevelWidth - 1);
+            this.CopyRange(this.coinHeight, child.coinHeight, crossoverPoint, Singletons.Configuration.LevelWidth - 1);
+            this.CopyRange(this.enemyType, child.enemyType, crossoverPoint, Singletons.Configuration.LevelWidth - 1);
+            
             return child;
+        }
+
+        private void CopyRange(int[] source, int[] destination, int startIndex, int endIndex)
+        {
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                destination[i] = source[i];
+            }
         }
 
         public static int GetRandomGroundLevel()
         {
-            return Singletons.RandomInstance.Next(16);
+            return Singletons.RandomInstance.Next(Singletons.Configuration.GroundConfig.MaximumValue + 1);
         }
 
         public static int GetRandomBlockType()
         {
-            return Singletons.RandomInstance.Next(5);
+            return Singletons.RandomInstance.Next(Singletons.Configuration.BlockConfig.MaxValue + 1);
         }
 
         public static int GetRandomBlockHeight()
         {
-            return Singletons.RandomInstance.Next(1, 5);
+            return Singletons.RandomInstance.Next(1, Singletons.Configuration.MarioMaxJump);
         }
 
         public static int GetRandomEnemyType()
         {
-            return Singletons.RandomInstance.Next(3);
+            return Singletons.RandomInstance.Next(Singletons.Configuration.EnemyConfig.MaxValue);
         }
 
         public static int GetRandomCoinHeight()
         {
-            return Singletons.RandomInstance.Next(11);
+            return Singletons.RandomInstance.Next(Singletons.Configuration.CoinsConfig.MaxValue);
         }
 
-        public Individ Mutate(Random rnd)
+        public Individ Mutate()
         {
-            Individ individ = new Individ();
-            individ.groundLevel = new int[this.groundLevel.Length];
-            individ.blockHeight = new int[this.blockHeight.Length];
-            individ.blockType = new int[this.blockType.Length];
-            individ.coinHeight = new int[this.coinHeight.Length];
-            individ.enemyType = new int[this.enemyType.Length];
+            Individ individ = (Individ)this.Clone();
 
-            this.groundLevel.CopyTo(individ.groundLevel, 0);
-            this.blockHeight.CopyTo(individ.blockHeight, 0);
-            this.blockType.CopyTo(individ.blockType, 0);
-            this.coinHeight.CopyTo(individ.coinHeight, 0);
-            this.enemyType.CopyTo(individ.enemyType, 0);
+            int indexToMutate = Singletons.RandomInstance.Next(100);
 
-            int indexToMutate = rnd.Next(100);
             this.groundLevel[indexToMutate] = GetRandomGroundLevel();
             this.blockHeight[indexToMutate] = GetRandomBlockHeight();
             this.blockType[indexToMutate] = GetRandomCoinHeight();
             this.enemyType[indexToMutate] = GetRandomEnemyType();
 
             return individ;
+        }
+
+        public object Clone()
+        {
+            Individ individ = new Individ
+            {
+                groundLevel = CloneArray(this.groundLevel),
+                blockHeight = CloneArray(this.blockHeight),
+                blockType = CloneArray(this.blockType),
+                coinHeight = CloneArray(this.coinHeight),
+                enemyType = CloneArray(this.enemyType)
+            };
+
+            return individ;
+        }
+
+        private int[] CloneArray(int[] source)
+        {
+            int[] copy = new int[source.Length];
+            source.CopyTo(copy, 0);
+            return copy;
         }
     }
 }
