@@ -8,34 +8,33 @@ namespace AutomaticGameLevelGeneration
     {
         public void Execute()
         {
-            Random rnd = new Random();
             List<Individ> individs = new List<Individ>();
             for (int i = 0; i < 100; i++)
             {
-                var individ = new Individ(rnd);
+                var individ = new Individ(1);
 
                 individs.Add(individ);
             }
 
             int generationNumber = 0;
             int maxGenerationNumber = 50;
-            while (generationNumber<maxGenerationNumber)
+            while (generationNumber < maxGenerationNumber)
             {
                 //crossover
                 List<Individ> crossover = new List<Individ>();
                 for (int i = 0; i < 50; i++)
                 {
-                    var p1 = individs[rnd.Next(100)];
-                    var p2 = individs[rnd.Next(100)];
-                    crossover.Add(p1.Crossover(p2, rnd.Next(100)));
+                    var p1 = individs[Singletons.RandomInstance.Next(100)];
+                    var p2 = individs[Singletons.RandomInstance.Next(100)];
+                    crossover.Add(p1.Crossover(p2, Singletons.RandomInstance.Next(100)));
                 }
 
                 //mutation
                 List<Individ> mutated = new List<Individ>();
                 for (int i = 0; i < 50; i++)
                 {
-                    var individ = individs[rnd.Next(100)];
-                    mutated.Add(individ.Mutate(rnd));
+                    var individ = individs[Singletons.RandomInstance.Next(100)];
+                    mutated.Add(individ.Mutate(Singletons.RandomInstance));
                 }
 
                 //fitness eval
@@ -47,7 +46,7 @@ namespace AutomaticGameLevelGeneration
                 var ff = new FitnessFunction();
                 foreach (var individ in potentialNewPopulation)
                 {
-                    individ.fitness = (float?) ff.EvaluateIndividual(individ);
+                    individ.fitness = (float?)ff.EvaluateIndividual(individ);
                 }
 
                 //choose new population
@@ -57,6 +56,6 @@ namespace AutomaticGameLevelGeneration
 
                 generationNumber++;
             }
-        }    
+        }
     }
 }

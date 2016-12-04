@@ -16,23 +16,38 @@ namespace AutomaticGameLevelGeneration
 
         public float? fitness = null;
 
-        public Individ(Random rnd)
+        public Individ(int xxx)
         {
-            groundLevel = new int[100];
-            blockType = new int[100];
-            blockHeight = new int[100];
-            enemyType = new int[100];
-            coinHeight = new int[100];
-
-            for (int i = 0; i < 100; i++)
-            {
-                groundLevel[i] = GetRandomGroundLevel(rnd);
-                blockType[i] = GetRandomBlockType(rnd);
-                blockHeight[i] = GetRandomGroundLevel(rnd);
-                enemyType[i] = GetRandomEnemyType(rnd);
-                coinHeight[i] = GetRandomCoinHeight(rnd);
-            }
+            groundLevel = GenerateRandomArray(
+                                Singletons.Configuration.LevelWidth,
+                                Singletons.Configuration.GroundConfig.MaximumValue);
+            blockType = GenerateRandomArray(
+                                Singletons.Configuration.LevelWidth,
+                                Singletons.Configuration.BlockConfig.MaxValue);
+            blockHeight = GenerateRandomArray(
+                                Singletons.Configuration.LevelWidth,
+                                Singletons.Configuration.MarioMaxJump);
+            coinHeight = GenerateRandomArray(
+                                Singletons.Configuration.LevelWidth,
+                                Singletons.Configuration.CoinsConfig.MaxValue);
+            enemyType = GenerateRandomArray(
+                                Singletons.Configuration.LevelWidth,
+                                Singletons.Configuration.EnemyConfig.MaxValue);
         }
+
+        private int[] GenerateRandomArray(int length, int maxValue)
+        {
+            var array = new int[length];
+            
+            for (int i = 0; i < length; i++)
+            {
+                array[i] = Singletons.RandomInstance.Next(maxValue + 1);
+            }
+
+            return array;
+        }
+
+
 
         private Individ()
         {
@@ -71,29 +86,29 @@ namespace AutomaticGameLevelGeneration
             return child;
         }
 
-        public static int GetRandomGroundLevel(Random rnd)
+        public static int GetRandomGroundLevel()
         {
-            return rnd.Next(16);
+            return Singletons.RandomInstance.Next(16);
         }
 
-        public static int GetRandomBlockType(Random rnd)
+        public static int GetRandomBlockType()
         {
-            return rnd.Next(5);
+            return Singletons.RandomInstance.Next(5);
         }
 
-        public static int GetRandomBlockHeight(Random rnd)
+        public static int GetRandomBlockHeight()
         {
-            return rnd.Next(1, 5);
+            return Singletons.RandomInstance.Next(1, 5);
         }
 
-        public static int GetRandomEnemyType(Random rnd)
+        public static int GetRandomEnemyType()
         {
-            return rnd.Next(3);
+            return Singletons.RandomInstance.Next(3);
         }
 
-        public static int GetRandomCoinHeight(Random rnd)
+        public static int GetRandomCoinHeight()
         {
-            return rnd.Next(11);
+            return Singletons.RandomInstance.Next(11);
         }
 
         public Individ Mutate(Random rnd)
@@ -106,16 +121,16 @@ namespace AutomaticGameLevelGeneration
             individ.enemyType = new int[this.enemyType.Length];
 
             this.groundLevel.CopyTo(individ.groundLevel, 0);
-            this.blockHeight.CopyTo(individ.blockHeight,0);
-            this.blockType.CopyTo(individ.blockType,0);
-            this.coinHeight.CopyTo(individ.coinHeight,0);
-            this.enemyType.CopyTo(individ.enemyType,0);
+            this.blockHeight.CopyTo(individ.blockHeight, 0);
+            this.blockType.CopyTo(individ.blockType, 0);
+            this.coinHeight.CopyTo(individ.coinHeight, 0);
+            this.enemyType.CopyTo(individ.enemyType, 0);
 
             int indexToMutate = rnd.Next(100);
-            this.groundLevel[indexToMutate] = GetRandomGroundLevel(rnd);
-            this.blockHeight[indexToMutate] = GetRandomBlockHeight(rnd);
-            this.blockType[indexToMutate] = GetRandomCoinHeight(rnd);
-            this.enemyType[indexToMutate] = GetRandomEnemyType(rnd);
+            this.groundLevel[indexToMutate] = GetRandomGroundLevel();
+            this.blockHeight[indexToMutate] = GetRandomBlockHeight();
+            this.blockType[indexToMutate] = GetRandomCoinHeight();
+            this.enemyType[indexToMutate] = GetRandomEnemyType();
 
             return individ;
         }

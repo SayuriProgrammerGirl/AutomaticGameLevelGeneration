@@ -23,7 +23,7 @@ namespace AutomaticGameLevelGeneration.FitnessFunctions
 
         private double GetMultiplicationCoefficient()
         {
-            return (double)2 / (this.numberOfValues * (this.numberOfValues - 1));
+            return (double)2 / (Math.Pow(this.numberOfValues, 2) - 1);
         }
 
         internal double GetSum(int[] values)

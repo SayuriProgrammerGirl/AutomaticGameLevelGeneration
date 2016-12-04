@@ -7,7 +7,6 @@ namespace AutomaticGameLevelGeneration
         public double EvaluateIndividual(Individ i)
         {
             //TODO - evaluate in batches
-
             //TODO - evaluate distance to desired values
             var entropy = new EntropyFormula(15, 100);
             var groundLevelEvaluation = entropy.Compute(i.groundLevel);
