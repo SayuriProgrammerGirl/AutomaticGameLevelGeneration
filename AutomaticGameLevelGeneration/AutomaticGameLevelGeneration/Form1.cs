@@ -12,6 +12,10 @@ namespace AutomaticGameLevelGeneration
         }
     }
 
+    public class SparsenessFormula
+    {
+        
+    }
 
     public class ApplicationLogic
     {

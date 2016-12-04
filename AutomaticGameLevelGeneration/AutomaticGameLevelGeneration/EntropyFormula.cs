@@ -32,6 +32,8 @@
             return entropy;
         }
 
+
+        //TODO - extract method in another class (Value Counter... something type)
         internal int[] GetValueCounts(int[] values)
         {
             int[] counts = new int[maxValue + 1];
@@ -49,6 +51,7 @@
             return counts;
         }
 
+        //TODO - extract method in another class (Value Counter... something type)
         internal double[] GetProbabilities(int[] valueCounts)
         {
             double[] valueProbability = new double[maxValue+1];
