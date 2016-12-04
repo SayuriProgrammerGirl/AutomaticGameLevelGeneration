@@ -1,8 +1,8 @@
-namespace AutomaticGameLevelGeneration
+namespace AutomaticGameLevelGeneration.FitnessFunctions
 {
     using System;
 
-    public class SparesenessFormula
+    public class SparesenessFormula : IFitnessFunction
     {
         private readonly int numberOfValues;
 

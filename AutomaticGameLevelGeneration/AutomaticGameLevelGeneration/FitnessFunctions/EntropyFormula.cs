@@ -1,9 +1,9 @@
-﻿namespace AutomaticGameLevelGeneration
+﻿namespace AutomaticGameLevelGeneration.FitnessFunctions
 {
     using System;
     using System.Linq;
 
-    public class EntropyFormula
+    public class EntropyFormula : IFitnessFunction
     {
         private readonly int maxValue;
         private readonly int numberOfValues;
@@ -53,7 +53,7 @@
         //TODO - extract to another class
         internal double[] GetProbabilities(int[] valueCounts)
         {
-            double[] valueProbability = new double[maxValue+1];
+            double[] valueProbability = new double[maxValue + 1];
 
             for (int i = 0; i < valueProbability.Length; i++)
             {

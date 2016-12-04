@@ -1,5 +1,7 @@
 ﻿namespace AutomaticGameLevelGeneration.Tests
 {
+    using AutomaticGameLevelGeneration.FitnessFunctions;
+
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
