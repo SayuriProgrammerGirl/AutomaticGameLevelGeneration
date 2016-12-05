@@ -7,10 +7,11 @@ namespace AutomaticGameLevelGeneration.Configuration
         //TODO - should we invest here?
         public int MarioMaxJump { get; set; }
 
-        public SparsenessConfiguration BlockConfig { get; set; }
-        public SparsenessConfiguration CoinsConfig { get; set; }
-        public SparsenessConfiguration EnemyConfig { get; set; }
-        public EntropyConfiguration GroundConfig { get; set; }
+        public FitnessConfiguration BlockConfig { get; set; }
+        public FitnessConfiguration CoinsConfig { get; set; }
+        public FitnessConfiguration EnemyConfig { get; set; }
+        public FitnessConfiguration GroundConfig { get; set; }
+
 
         public static LevelConfig GetDefault()
         {
@@ -18,29 +19,29 @@ namespace AutomaticGameLevelGeneration.Configuration
             {
                 LevelWidth = 200,
                 MarioMaxJump = 4,
-                BlockConfig = new SparsenessConfiguration()
+                BlockConfig = new FitnessConfiguration()
                 {
-                    DesiredSparseness = 1,
-                    MaxValue = 3,
-                    SparsenessParts = 10
+                    DesiredFitness = 1,
+                    MaximumValue = 3,
+                    PartsPerBatch = 10
                 },
-                CoinsConfig = new SparsenessConfiguration()
+                CoinsConfig = new FitnessConfiguration()
                 {
-                    DesiredSparseness = (float)0.5,
-                    MaxValue = 2,
-                    SparsenessParts = 10
-                },
-                EnemyConfig = new SparsenessConfiguration()
-                {
-                    DesiredSparseness = 0,
-                    MaxValue = 2,
-                    SparsenessParts = 20
-                },
-                GroundConfig = new EntropyConfiguration()
-                {
-                    DesiredEntropy = 0,
+                    DesiredFitness = (float)0.5,
                     MaximumValue = 2,
-                    EntropyParts = 200,
+                    PartsPerBatch = 10
+                },
+                EnemyConfig = new FitnessConfiguration()
+                {
+                    DesiredFitness = 0,
+                    MaximumValue = 2,
+                    PartsPerBatch = 20
+                },
+                GroundConfig = new FitnessConfiguration()
+                {
+                    DesiredFitness = 0,
+                    MaximumValue = 2,
+                    PartsPerBatch = 200,
                 }
             };
 

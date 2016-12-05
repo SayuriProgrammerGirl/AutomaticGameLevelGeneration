@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace AutomaticGameLevelGeneration
 {
+    using AutomaticGameLevelGeneration.FitnessFunctions;
+
     public class ApplicationLogic
     {
         public void Execute()

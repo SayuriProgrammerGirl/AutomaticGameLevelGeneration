@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ApplicationLogic.cs" />
     <Compile Include="Configuration\EntropyConfiguration.cs" />
+    <Compile Include="Configuration\FitnessConfiguration.cs" />
     <Compile Include="FitnessFunctions\FitnessFunction.cs" />
     <Compile Include="FitnessFunctions\IFitnessFunction.cs" />
     <Compile Include="FitnessFunctions\EntropyFormula.cs" />
