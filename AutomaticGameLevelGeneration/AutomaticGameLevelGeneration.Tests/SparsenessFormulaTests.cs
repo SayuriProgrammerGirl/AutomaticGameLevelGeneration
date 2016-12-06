@@ -10,9 +10,9 @@
         [TestMethod]
         public void TestOfSparsenessForTestData1()
         {
-            int[] testValues = { 1, 0, 1, 1};
+            int[] testValues = { 1, 0, 1, 1 };
             double result = new SparesenessFormula().Compute(testValues);
-            Assert.AreEqual(2,result);
+            Assert.AreEqual((double)24 / 15, result,0.0000001);
         }
 
         [TestMethod]
@@ -20,7 +20,7 @@
         {
             int[] testValues = { 1, 0, 2, 0 };
             double result = new SparesenessFormula().Compute(testValues);
-            Assert.AreEqual((double)8/12, result);
+            Assert.AreEqual((double)8 / 15, result,0.000001);
         }
     }
 }

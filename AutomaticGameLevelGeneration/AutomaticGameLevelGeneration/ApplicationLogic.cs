@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace AutomaticGameLevelGeneration
 {
+    using System.IO;
+    using System.Web.Script.Serialization;
+
     using AutomaticGameLevelGeneration.FitnessFunctions;
 
     public class ApplicationLogic
@@ -58,8 +61,12 @@ namespace AutomaticGameLevelGeneration
 
                 generationNumber++;
             }
+            var json = new JavaScriptSerializer().Serialize(individs[0]);
 
-            int x = 100;
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter("out.txt", true))
+            {
+                file.WriteLine(json);
+            }
         }
     }
 }

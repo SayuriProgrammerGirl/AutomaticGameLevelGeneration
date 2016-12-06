@@ -8,28 +8,22 @@
     {
         public double EvaluateIndividual(Individ individ)
         {
-            var groundLevelEvaluation = this.NormalizeEntropyValue(this.EvalEntropy(individ, Singletons.Configuration.GroundConfig));
+            var groundLevelEvaluation = this.EvalEntropy(individ, Singletons.Configuration.GroundConfig);
             var blockSparsenessEval = this.EvalSparseness(individ, Singletons.Configuration.BlockConfig);
             var coinSparsenessEval = this.EvalSparseness(individ, Singletons.Configuration.CoinsConfig);
             var enemySparsenessEval = this.EvalSparseness(individ, Singletons.Configuration.EnemyConfig);
 
-            return groundLevelEvaluation + blockSparsenessEval + coinSparsenessEval + enemySparsenessEval;
+            return (groundLevelEvaluation + blockSparsenessEval + coinSparsenessEval + enemySparsenessEval)/4;
         }
 
-        ////TODO - explain why this function was chosen, why not another? Maybe make it so that this is a seam point in the application
-        private double NormalizeEntropyValue(double entropy)
-        {
-            ////Tanh(x)
-            return Math.Tanh(entropy);
-        }
         private float EvalEntropy(Individ individ, FitnessConfiguration config)
         {
-            return Eval(individ, config, new EntropyFormula(config));
+            return this.Eval(individ, config, new EntropyFormula(config));
         }
 
         private float EvalSparseness(Individ individ, FitnessConfiguration config)
         {
-            return Eval(individ, config, new SparesenessFormula());
+            return this.Eval(individ, config, new SparesenessFormula());
         }
 
         private float Eval(Individ individ, FitnessConfiguration config, IFitnessFunction func)

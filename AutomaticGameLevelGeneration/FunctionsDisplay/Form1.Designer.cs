@@ -1,4 +1,4 @@
-﻿namespace AutomaticGameLevelGeneration
+﻿namespace FunctionsDisplay
 {
     partial class Form1
     {
@@ -28,13 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.display = new GraphLib.PlotterDisplayEx();
             this.SuspendLayout();
+            // 
+            // plotterDisplayEx1
+            // 
+            this.display.BackColor = System.Drawing.Color.Transparent;
+            this.display.BackgroundColorBot = System.Drawing.Color.White;
+            this.display.BackgroundColorTop = System.Drawing.Color.White;
+            this.display.DashedGridColor = System.Drawing.Color.DarkGray;
+            this.display.DoubleBuffering = false;
+            this.display.Location = new System.Drawing.Point(12, 12);
+            this.display.Name = "display";
+            this.display.PlaySpeed = 0.5F;
+            this.display.Size = new System.Drawing.Size(1132, 623);
+            this.display.SolidGridColor = System.Drawing.Color.DarkGray;
+            this.display.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1098, 724);
+            this.ClientSize = new System.Drawing.Size(1156, 647);
+            this.Controls.Add(this.display);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -43,6 +60,7 @@
 
         #endregion
 
+        private GraphLib.PlotterDisplayEx display;
     }
 }
 

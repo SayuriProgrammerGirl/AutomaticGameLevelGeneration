@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomaticGameLevelGeneratio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomaticGameLevelGeneration.Tests", "AutomaticGameLevelGeneration.Tests\AutomaticGameLevelGeneration.Tests.csproj", "{82E74E2C-66FE-4774-A11B-8C102393F007}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionsDisplay", "FunctionsDisplay\FunctionsDisplay.csproj", "{401A9548-31F0-44B1-A903-2A647EBAC32D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{82E74E2C-66FE-4774-A11B-8C102393F007}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82E74E2C-66FE-4774-A11B-8C102393F007}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82E74E2C-66FE-4774-A11B-8C102393F007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{401A9548-31F0-44B1-A903-2A647EBAC32D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{401A9548-31F0-44B1-A903-2A647EBAC32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{401A9548-31F0-44B1-A903-2A647EBAC32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{401A9548-31F0-44B1-A903-2A647EBAC32D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
