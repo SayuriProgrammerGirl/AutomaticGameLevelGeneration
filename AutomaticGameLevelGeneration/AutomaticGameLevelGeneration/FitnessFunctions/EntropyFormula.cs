@@ -3,39 +3,39 @@
     using System;
     using System.Linq;
 
+    using AutomaticGameLevelGeneration.Configuration;
+
     public class EntropyFormula : IFitnessFunction
     {
-        private readonly int maxValue;
-        private readonly int numberOfValues;
+        private readonly FitnessConfiguration config;
 
-        public EntropyFormula(int maxValue, int numberOfValues)
+        public EntropyFormula(FitnessConfiguration config)
         {
-            this.maxValue = maxValue;
-            this.numberOfValues = numberOfValues;
+            this.config = config;
         }
 
         public double Compute(int[] values)
         {
             int[] valueCounts = this.GetValueCounts(values);
-            double[] valueProbabilities = this.GetProbabilities(valueCounts);
+            double[] valueProbabilities = this.GetProbabilities(valueCounts, values.Length);
             double entropy = this.ComputeValueEntropy(valueProbabilities);
             return entropy;
         }
 
+
+
         internal double ComputeValueEntropy(double[] probabilities)
         {
-            double sum = probabilities
-                .Sum(x => x * Math.Log(x, 2));
+            double sum = probabilities.Where(x => Math.Abs(x) > 0.00000001).Sum(x => x * Math.Log(x, 2));
 
             double entropy = -1 * sum;
 
             return entropy;
         }
 
-        //TODO - extract to another class
-        internal int[] GetValueCounts(int[] values)
+        private int[] GetValueCounts(int[] values)
         {
-            int[] counts = new int[maxValue + 1];
+            int[] counts = new int[this.config.MaximumValue + 1];
 
             for (int i = 0; i < counts.Length; i++)
             {
@@ -50,10 +50,9 @@
             return counts;
         }
 
-        //TODO - extract to another class
-        internal double[] GetProbabilities(int[] valueCounts)
+        private double[] GetProbabilities(int[] valueCounts, int numberOfValues)
         {
-            double[] valueProbability = new double[maxValue + 1];
+            double[] valueProbability = new double[config.MaximumValue + 1];
 
             for (int i = 0; i < valueProbability.Length; i++)
             {

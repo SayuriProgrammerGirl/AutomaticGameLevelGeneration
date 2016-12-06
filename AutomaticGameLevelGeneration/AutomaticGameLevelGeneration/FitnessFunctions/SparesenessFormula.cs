@@ -4,33 +4,26 @@ namespace AutomaticGameLevelGeneration.FitnessFunctions
 
     public class SparesenessFormula : IFitnessFunction
     {
-        private readonly int numberOfValues;
-
-        public SparesenessFormula(int numberOfValues)
-        {
-            this.numberOfValues = numberOfValues;
-        }
-
         //For coins, blocks, enemies
         public double Compute(int[] values)
         {
             var sum = this.GetSum(values);
 
-            double sparseness = sum * this.GetMultiplicationCoefficient();
+            double sparseness = sum * this.GetMultiplicationCoefficient(values.Length);
 
             return sparseness;
         }
 
-        private double GetMultiplicationCoefficient()
+        private double GetMultiplicationCoefficient(int numberOfValues)
         {
-            return (double)2 / (Math.Pow(this.numberOfValues, 2) - 1);
+            return (double)2 / (Math.Pow(numberOfValues, 2) - 1);
         }
 
         internal double GetSum(int[] values)
         {
             double sum = 0;
 
-            for (int i = 0; i < this.numberOfValues; i++)
+            for (int i = 0; i < values.Length; i++)
             {
                 if (IsNotEmptyValue(values[i]))
                 {
@@ -44,7 +37,7 @@ namespace AutomaticGameLevelGeneration.FitnessFunctions
         {
             double sum = 0;
 
-            for (int position = 0; position < this.numberOfValues; position++)
+            for (int position = 0; position < values.Length; position++)
             {
                 if (IsNotEmptyValue(values[position]))
                 {
