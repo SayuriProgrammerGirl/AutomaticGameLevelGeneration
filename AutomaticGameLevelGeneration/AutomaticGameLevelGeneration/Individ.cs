@@ -1,42 +1,7 @@
 namespace AutomaticGameLevelGeneration
 {
     using System;
-    using AutomaticGameLevelGeneration.Configuration;
 
-    public class ArrayUtil
-    {
-        public static int[] GenerateRandomArray(LevelConfig cfg, int maxValue)
-        {
-            var array = new int[cfg.LevelWidth];
-
-            for (int i = 0; i < cfg.LevelWidth; i++)
-            {
-                array[i] = Singletons.RandomInstance.Next(maxValue + 1);
-            }
-
-            return array;
-        }
-
-        public static int[] GenerateRandomArray(LevelConfig cfg, FitnessConfiguration config)
-        {
-            return GenerateRandomArray(cfg, config.MaximumValue);
-        }
-
-        public static int[] CloneArray(int[] source)
-        {
-            int[] copy = new int[source.Length];
-            source.CopyTo(copy, 0);
-            return copy;
-        }
-
-        public static void CopyValuesFromStartIndexToEndIndex(int[] source, int[] destination, int startIndex, int endIndex)
-        {
-            for (int i = startIndex; i <= endIndex; i++)
-            {
-                destination[i] = source[i];
-            }
-        }
-    }
     public class Individ : ICloneable
     {
         public int[] groundLevel;
@@ -67,12 +32,14 @@ namespace AutomaticGameLevelGeneration
 
         public Individ Crossover(Individ other, int crossoverPoint)
         {
-            var child = new Individ();
-            child.groundLevel = new int[Singletons.Configuration.LevelWidth];
-            child.blockHeight = new int[Singletons.Configuration.LevelWidth];
-            child.blockType = new int[Singletons.Configuration.LevelWidth];
-            child.coinHeight = new int[Singletons.Configuration.LevelWidth];
-            child.enemyType = new int[Singletons.Configuration.LevelWidth];
+            var child = new Individ
+                            {
+                                groundLevel = new int[Singletons.Configuration.LevelWidth],
+                                blockHeight = new int[Singletons.Configuration.LevelWidth],
+                                blockType = new int[Singletons.Configuration.LevelWidth],
+                                coinHeight = new int[Singletons.Configuration.LevelWidth],
+                                enemyType = new int[Singletons.Configuration.LevelWidth]
+                            };
 
             this.CopyRangeFromSourceToDestination(this,child,0,crossoverPoint-1);
             this.CopyRangeFromSourceToDestination(other,child,crossoverPoint,Singletons.Configuration.LevelWidth - 1);
@@ -118,7 +85,7 @@ namespace AutomaticGameLevelGeneration
         {
             Individ individ = (Individ)this.Clone();
 
-            int indexToMutate = Singletons.RandomInstance.Next(100);
+            int indexToMutate = Singletons.RandomInstance.Next(Singletons.Configuration.LevelWidth);
 
             this.groundLevel[indexToMutate] = GetRandomGroundLevel();
             this.blockHeight[indexToMutate] = GetRandomBlockHeight();

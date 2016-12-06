@@ -70,7 +70,7 @@
 
                 var batchSize = maxIndex - minIndex - 1;
 
-                SparesenessFormula ef = new SparesenessFormula(levelWidth);
+                SparesenessFormula ef = new SparesenessFormula(batchSize);
 
                 int[] batchArray = new int[batchSize];
                 for (int j = 0; j < batchSize; j++)

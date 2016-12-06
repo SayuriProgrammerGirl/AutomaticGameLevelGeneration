@@ -7,40 +7,9 @@ namespace AutomaticGameLevelGeneration
         public Form1()
         {
             InitializeComponent();
+            new ApplicationLogic().Execute();
         }
     }
+}
 
-
-    //public class Generation
-    //{
-    //    private Population population;
-    //    public static Generation GetGenerationZero()
-    //    {
-    //        throw new System.NotImplementedException();
-    //    }
-    //}
-
-    //public class Population
-    //{
-    //    private List<Individ> individs;
-    //}
-
-    //internal class Individ
-    //{
-    //    private List<Chromosome> chromosomes;
-    //    private float fitness;
-    //}
-
-    //internal class Chromosome
-    //{
-    //    private int groundLevel;
-
-    //    private int blockType;
-
-    //    private int blockHeight;
-
-    //    private int enemyType;
-
-    //    private int coinHeight;
-    //}
 }

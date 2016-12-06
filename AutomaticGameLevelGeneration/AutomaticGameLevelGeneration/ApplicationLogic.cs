@@ -19,7 +19,7 @@ namespace AutomaticGameLevelGeneration
             }
 
             int generationNumber = 0;
-            int maxGenerationNumber = 50;
+            int maxGenerationNumber = 150;
             while (generationNumber < maxGenerationNumber)
             {
                 //crossover
@@ -58,6 +58,8 @@ namespace AutomaticGameLevelGeneration
 
                 generationNumber++;
             }
+
+            int x = 100;
         }
     }
 }
