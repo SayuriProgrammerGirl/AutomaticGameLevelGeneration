@@ -7,6 +7,7 @@ namespace AutomaticGameLevelGeneration
     using System.IO;
     using System.Web.Script.Serialization;
 
+    using AutomaticGameLevelGeneration.Configuration;
     using AutomaticGameLevelGeneration.FitnessFunctions;
 
     public class ApplicationLogic
@@ -61,12 +62,32 @@ namespace AutomaticGameLevelGeneration
 
                 generationNumber++;
             }
+
+
             var json = new JavaScriptSerializer().Serialize(individs[0]);
 
             using (System.IO.StreamWriter file = new System.IO.StreamWriter("out.txt", true))
             {
                 file.WriteLine(json);
             }
+        }
+    }
+
+    class TmxFileGenerator
+    {
+        private readonly LevelConfig config;
+
+        private readonly Individ individ;
+
+        public TmxFileGenerator(LevelConfig config, Individ individ)
+        {
+            this.config = config;
+            this.individ = individ;
+        }
+
+        public string Generate()
+        {
+            
         }
     }
 }

@@ -89,6 +89,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Quintus\data\level1.tmx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -96,6 +97,22 @@
     </None>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Quintus\images\player.png" />
+    <Content Include="Quintus\images\tiles_map.png" />
+    <Content Include="Quintus\index.html" />
+    <Content Include="Quintus\lib\quintus.js" />
+    <Content Include="Quintus\lib\quintus_2d.js" />
+    <Content Include="Quintus\lib\quintus_anim.js" />
+    <Content Include="Quintus\lib\quintus_audio.js" />
+    <Content Include="Quintus\lib\quintus_input.js" />
+    <Content Include="Quintus\lib\quintus_scenes.js" />
+    <Content Include="Quintus\lib\quintus_sprites.js" />
+    <Content Include="Quintus\lib\quintus_touch.js" />
+    <Content Include="Quintus\lib\quintus_ui.js" />
+    <Content Include="WebPages\index.html" />
+    <Content Include="WebPages\styles\General.css" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
